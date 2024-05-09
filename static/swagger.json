@@ -1,0 +1,112 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FLASK-JSONRPC-SWAGGER Example",
+    "description": "This app showcases a trivial JSON-RPC API.",
+    "version": "v1.2.3"
+  },
+  "tags": [
+    {
+      "name": "Api",
+      "description": "Example"
+    }
+  ],
+  "paths": {
+    "/api/beer": {
+      "post": {
+        "tags": [
+          "Beer"
+        ],
+        "summary": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request_buyBeer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": null,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/response_buyBeer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "buyBeer": {
+        "type": "object",
+        "properties": {
+          "beer_name": {
+            "type": "string",
+            "required": true
+          },
+          "quantity": {
+            "type": "integer",
+            "required": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "request_buyBeer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e4ead261-f09a-4077-be75-2ddb0a6528eb"
+          },
+          "jsonrpc": {
+            "type": "string",
+            "example": "2.0"
+          },
+          "method": {
+            "type": "string",
+            "example": "buyBeer"
+          },
+          "params": {
+            "$ref": "#/components/schemas/buyBeer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "result_buyBeer": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean",
+            "nullable": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "response_buyBeer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e4ead261-f09a-4077-be75-2ddb0a6528eb"
+          },
+          "jsonrpc": {
+            "type": "string",
+            "example": "2.0"
+          },
+          "result": {
+            "$ref": "#/components/schemas/result_buyBeer"
+          }
+        },
+        "additionalProperties": false
+      },
+    },
+    "x-envelope": "jsonrpc-2.0"
+  }
+}
